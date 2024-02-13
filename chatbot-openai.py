@@ -4,9 +4,8 @@ import openai
 import gradio as gr
 import os
 import time
-#openai.api_key = "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"
 
-os.environ["OPENAI_API_KEY"] = "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"  # Replace with your key
+os.environ["OPENAI_API_KEY"] = "sk-xxx"  # Replace with your key
 
 llm = ChatOpenAI(temperature=1.0, model='gpt-3.5-turbo-0613')
 
