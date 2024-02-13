@@ -11,6 +11,13 @@ CUDA provides developers with the tools and functionalities needed to harness th
 
 - nvidia-smi
 
+# test whether cuda is available
+- import  torch
+- print(torch.cuda.is_available())
+
+# download
+- https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64&target_version=11&target_type=exe_local
+
 
 # references
 
