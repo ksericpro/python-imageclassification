@@ -19,7 +19,11 @@ CUDA provides developers with the tools and functionalities needed to harness th
 - https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64&target_version=11&target_type=exe_local
 
 
+# setup environment
+- set %TF_ENABLE_ONEDNN_OPTS%=0
+
 # references
 
 [link] (https://www.gradio.app/guides/quickstart)
 [cuda] (https://saturncloud.io/blog/what-is-assertionerror-torch-not-compiled-with-cuda-enabled/)
+[GradioML] (https://towardsdatascience.com/creating-a-simple-image-classification-machine-learning-demo-with-gradioml-361a245d7b50s)
