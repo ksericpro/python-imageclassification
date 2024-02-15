@@ -19,12 +19,21 @@ CUDA provides developers with the tools and functionalities needed to harness th
 - https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64&target_version=11&target_type=exe_local
 
 
-# setup environment
+# Training [For Image Classification]
+
+## Terminology
+
+- One Epoch is when an ENTIRE dataset is passed forward and backward through the neural network only ONCE
+- Total number of training examples present in a single batch.
+- Iterations is the number of batches needed to complete one epoch.
+- Gradient Descend = It is an iterative optimization algorithm used in machine learning to find the best results (minima of a curve). Gradient means the rate of inclination or declination of a slope.
+- The learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function.
+
+## setup environment
 - set TF_ENABLE_ONEDNN_OPTS=0
 - get %TF_ENABLE_ONEDNN_OPTS%
 - python training.py
 
-# Training [For Image Classification]
 ## model 1
 
 _________________________________________________________________
@@ -66,6 +75,7 @@ _________________________________________________________________
     accuracy                           0.73      2000
    macro avg       0.73      0.73      0.73      2000
 weighted avg       0.73      0.73      0.73      2000
+
 ## model 2
 
 _________________________________________________________________
@@ -143,4 +153,6 @@ weighted avg       0.77      0.77      0.77      2000
 
 [link] (https://www.gradio.app/guides/quickstart)
 [cuda] (https://saturncloud.io/blog/what-is-assertionerror-torch-not-compiled-with-cuda-enabled/)
-[GradioML] (https://towardsdatascience.com/creating-a-simple-image-classification-machine-learning-demo-with-gradioml-361a245d7b50s)
+[GradioML] (https://towardsdatascience.com/creating-a-simple-image-classification-machine-learning-demo-with-gradioml-361a245d7b50)
+
+[Error] (https://stackoverflow.com/questions/67553391/input-0-of-layer-conv2d-is-incompatible-with-layer-expected-axis-1-of-input-sh)
