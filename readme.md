@@ -156,3 +156,5 @@ weighted avg       0.77      0.77      0.77      2000
 [GradioML] (https://towardsdatascience.com/creating-a-simple-image-classification-machine-learning-demo-with-gradioml-361a245d7b50)
 
 [Error] (https://stackoverflow.com/questions/67553391/input-0-of-layer-conv2d-is-incompatible-with-layer-expected-axis-1-of-input-sh)
+
+[ollama](https://towardsdatascience.com/set-up-a-local-llm-on-cpu-with-chat-ui-in-15-minutes-4cdc741408df)
