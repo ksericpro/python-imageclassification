@@ -10,11 +10,11 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
-
 #######################
 ## Step 1 Load Model
 #######################
 FILENAME = 'models/pets/finalized_model2.sav'
+SHOW = True
 
 print("Loading model {}".format(FILENAME))
 # open a file, where you stored the pickled data
@@ -42,14 +42,17 @@ def create_testing_data():
     for category in CATEGORIES:                                                # Looping over each category from the CATEGORIES list
         path = os.path.join(DATADIR_test, category)                            # Joining images with labels
         class_num = category
-
+        ct = 0
         for img in os.listdir(path):
+            ct = ct + 1
             img_array = cv2.imread(os.path.join(path, img))                    # Reading the data
 
             new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))            # Resizing the images
+            #show image shape
+            print("#{}. The old image shape is {}. The new image shape is {}".format(ct, img_array.shape, new_array.shape))
 
             testing_data.append([new_array, class_num])                        # Appending both the images and labels
-    print("{} testing record(s)".format(len(testing_data)))
+    print("{} testing record(s) in total.".format(len(testing_data)))
 
 create_testing_data()
 
@@ -65,18 +68,52 @@ X_test = np.array(X_test)
 # Predicting the test image with the best model and storing the prediction value in res variable
 res = model.predict(X_test[1].reshape(1, 150, 150, 3))
 
+print(res)
 # Applying argmax on the prediction to get the highest index value
 i=np.argmax(res)
+predicted = "Unknown"
 if(i == 0):
-    print("Dogs")
+    predicted = "Dogs"
 if(i==1):
-    print("Cats")
+    predicted = "Cats"
 
-#DATADIR = os.path.abspath(os.getcwd()) + '/PetImages'
-#path = os.path.join(DATADIR_test, category)    #path to cats or dogs dir
-#first_img_path = os.listdir(path)[0]
-#img_array = cv2.imread(os.path.join(path, first_img_path), cv2.IMREAD_GRAYSCALE)
-#plt.imshow(img_array, cmap = "gray")
-#plt.show()
-#show image shape
-#print('The image shape is {}'.format(img_array.shape)
+print("Predicted=>{}".format(predicted))
+
+
+# Predict user defined image from location
+path = os.path.join(DATADIR_test, CATEGORIES[0])    #path to cats or dogs dir
+total = len(os.listdir(path))
+from random import randrange
+index = randrange(total)
+print("Chosen index={}".format(index))
+chosen_img_path = os.listdir(path)[index]
+
+print("\n[{}] Loading Image file={}/{}".format(total, path, chosen_img_path))
+img_array = cv2.imread(os.path.join(path, chosen_img_path))
+
+# predict
+new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
+
+# show image shape
+print("The old image shape is {}. The new image shape is {}".format(img_array.shape, new_array.shape))
+
+new_array_np = np.array(new_array)
+
+# Predicting the test image with the best model and storing the prediction value in res variable
+res = model.predict(new_array_np.reshape(1, 150, 150, 3))
+print(res)
+
+# Applying argmax on the prediction to get the highest index value
+i=np.argmax(res)
+predicted = "Unknown"
+if(i == 0):
+    predicted = "Dogs"
+if(i==1):
+    predicted = "Cats"
+
+print("Predicted=>{}".format(predicted))
+
+if SHOW:
+    plt.title = chosen_img_path
+    plt.imshow(img_array, cmap = "gray")
+    plt.show()
