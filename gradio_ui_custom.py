@@ -145,28 +145,77 @@ def trainandsave():
 
 #create a function to make predictions
 #return a dictionary of labels and probabilities
+DATADIR  = os.path.abspath(os.getcwd()) + '/data/pets/test_set'            # Path of training data after unzipping
+CATEGORIES = ['dogs', 'cats']                                                  # Storing all the categories in categories variable
+IMG_SIZE = 150 
+
 def cat_or_dog(img):
-    new_array = cv2.resize(img, (IMG_SIZE, IMG_SIZE))
+    # Predict user defined image from location
+    path = os.path.join(DATADIR, CATEGORIES[0])    #path to cats or dogs dir
+    total = len(os.listdir(path))
+    from random import randrange
+    index = randrange(total)
+    print("Chosen index={}".format(index))
+    chosen_img_path = os.listdir(path)[index]
+
+    print("\n[{}] Loading Image file={}/{}".format(total, path, chosen_img_path))
+    img_array = cv2.imread(os.path.join(path, chosen_img_path))
+
+    new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
+
+    # predict
+    new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
 
     # show image shape
-    print("The old image shape is {}. The new image shape is {}".format(img.shape, new_array.shape))
+    print("The old image shape is {}. The new image shape is {}".format(img_array.shape, new_array.shape))
+
+    # show image shape
     
+    #The old image shape is (150, 150). The new image shape is (150, 150)
+    #The old image shape is (500, 470, 3). The new image shape is (150, 150, 3)
+    #new_array_np = np.array(new_array)
+
     new_array_np = np.array(new_array)
 
-     # Predicting the test image with the best model and storing the prediction value in res variable
-    res = model.predict(new_array_np.reshape(1, IMG_SIZE, IMG_SIZE, 3))
+    # Predicting the test image with the best model and storing the prediction value in res variable
+    res = model.predict(new_array_np.reshape(1, 150, 150, 3))
     print(res)
 
-    img = img.reshape(1, IMG_SIZE, IMG_SIZE, 3)
+    # Applying argmax on the prediction to get the highest index value
+    i=np.argmax(res)
+    predicted = "Unknown"
+    if(i == 0):
+        predicted = "Dogs"
+    if(i==1):
+        predicted = "Cats"
+
+    print("Predicted=>{}".format(predicted))
+
+    print(type(im))
+
+    #new_array_np2 = np.array(im)
+    #reshape((50,1104,-1))
+    #img = img.reshape(IMG_SIZE, IMG_SIZE, 1)
+    print("shape={}".format(im.shape))
+    #new_array_np2.reshape(1, 150, 150, 3)
+
+    #input("Press Enter to continue...")
+
+    #img = img.reshape(1, IMG_SIZE, IMG_SIZE, 3)
+
+    # show image shape
+    #print("The uploaded image shape is {}".format(img.shape))
    
 
-    prediction = model.predict(img).tolist()[0]
-    print("predicion=>".format(prediction))
-    class_names = ["Dog", "Cat"]
-    return {class_names[i]: prediction[i] for i in range(2)}
+    #prediction = model.predict(img).tolist()[0]
+    #print("predicion=>".format(prediction))
+    #class_names = ["Dog", "Cat"]
+    #return {class_names[i]: prediction[i] for i in range(2)}
 #set the user uploaded image as the input array
 #match same shape as the input shape in the model
-im = gradio.inputs.Image(shape=(IMG_SIZE, IMG_SIZE), image_mode='L', invert_colors=False, source="upload")
+#im = gradio.inputs.Image(shape=(IMG_SIZE, IMG_SIZE), image_mode='L', invert_colors=False, source="upload")
+im = gradio.inputs.Image(type="numpy", shape=(IMG_SIZE, IMG_SIZE))
+# show image shape
 #setup the interface
 iface = gr.Interface(
     fn = cat_or_dog, 
