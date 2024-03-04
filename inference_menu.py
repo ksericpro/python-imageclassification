@@ -52,7 +52,7 @@ def getMenu(mgr):
             imgfile = getImageFile(dictionary["cats"])
             print("img file={}".format(imgfile))
             predicted = mgr.predictFromImage(imgfile)
-            #print("Predicted=>{}".format(predicted))
+            print("Predicted=>{}".format(predicted))
         elif choice == '3':
             mgr.show(imgfile)
         elif choice == 'q':

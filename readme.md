@@ -157,6 +157,9 @@ weighted avg       0.77      0.77      0.77      2000
 # Inference
 - python gradio_ui_original.py
 
+# Api server
+- uvicorn api_server:app --reload
+
 # references
 
 [link] (https://www.gradio.app/guides/quickstart)
