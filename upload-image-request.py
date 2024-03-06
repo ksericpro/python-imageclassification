@@ -4,7 +4,7 @@ from random import randrange
 
 DATADIR = os.path.abspath(os.getcwd()) + '/data/pets/test_set'            # Path of training data after unzipping
 CATEGORIES = ['dogs', 'cats']     
-url = 'http://127.0.0.1:8000/upload'
+url = 'http://127.0.0.1:8000/predict'
 
 path = os.path.join(DATADIR, CATEGORIES[randrange(2)]) 
 total = len(os.listdir(path))

@@ -160,6 +160,10 @@ weighted avg       0.77      0.77      0.77      2000
 # Api server
 - uvicorn api_server:app --reload
 
+# calling apis
+- curl localhost:8000/inference
+- python upload-image-request.pys
+
 # references
 
 [link] (https://www.gradio.app/guides/quickstart)

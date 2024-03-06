@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 
 class InferenceMgr:
     def __init__(self, modelfile, imgsize):
+        print("Inference Mgr")
         self.modelfile = modelfile
         self.imgsize = imgsize
 

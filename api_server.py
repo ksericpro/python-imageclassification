@@ -2,35 +2,38 @@ from typing import Union
 from fastapi import FastAPI, File, UploadFile
 import os
 import inferencemgr
+import utilsmgr
 from random import randrange
+from fastapi.middleware.cors import CORSMiddleware
+from os.path import join, dirname
+from dotenv import load_dotenv
+import config
 
-os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+MODEL = config.MODEL                                             
+IMG_SIZE = config.IMG_SIZE
+CATEGORIES=config.CATEGORIES                                              
+print("MODEL={}, CATEGORIES={}, IMG_SIZE={}".format(MODEL, CATEGORIES, IMG_SIZE))
 
-FILENAME = 'models/pets/finalized_model2.sav'
-DATADIR = os.path.abspath(os.getcwd()) + '/data/pets/test_set'            # Path of training data after unzipping
-CATEGORIES = ['dogs', 'cats']                                                  # Storing all the categories in categories variable
-IMG_SIZE = 150                                                                 # Defining the size of the image to 150
-# Create a dictionary
-dictionary = {} # Curly braces method
-dictionary["dogs"] = 0
-dictionary["cats"] = 1
-UPLOAD_DIR = os.path.abspath(os.getcwd()) + '/upload' 
+DATADIR = config.DATADIR
+UPLOAD_DIR = config.UPLOAD_DIR
 
-mgr = inferencemgr.InferenceMgr(FILENAME, IMG_SIZE)
-mgr.loadModel()
-
-def getImageFile(dict):
-    # Predict user defined image from location
-    path = os.path.join(DATADIR, CATEGORIES[dict])    #path to cats or dogs dir
-    total = len(os.listdir(path))
-
-    index = randrange(total)
-    print("Chosen index={}".format(index))
-    chosen_img_path = os.listdir(path)[index]
-    return os.path.join(path, chosen_img_path)
-
+utils_mgr = utilsmgr.UtilsMgr()
+inf_mgr = inferencemgr.InferenceMgr(MODEL, IMG_SIZE)
+inf_mgr.loadModel()
 
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():
@@ -40,23 +43,29 @@ def read_root():
 def ping():
     return {"message": "pong"}
 
-@app.post("/inference")
+@app.get("/inference")
 def inference():
-    imgfile = getImageFile(randrange(2))
+    imgfile = utils_mgr.getImageFile(DATADIR, CATEGORIES, randrange(2))
     print("img file={}".format(imgfile))
-    predicted = mgr.predictFromImage(imgfile)
-    print("Predicted=>{}".format(predicted))
+    predicted = inf_mgr.predictFromImage(imgfile)
+   # print("Predicted=>{}".format(predicted))
     return {"message":"ok", "result":predicted}
 
-@app.post("/upload")
+@app.post("/predict")
 def upload(file: UploadFile = File(...)):
-    try:
-        with open(os.path.join(UPLOAD_DIR, file.filename), 'wb') as f:
+    filename = os.path.join(UPLOAD_DIR, file.filename)
+    print("Saving to {}".format(filename))
+    try: 
+        with open(filename, 'wb') as f:
             while contents := file.file.read(1024 * 1024):
                 f.write(contents)
+       
     except Exception:
         return {"message": "There was an error uploading the file"}
     finally:
         file.file.close()
 
-    return {"message": f"Successfully uploaded {file.filename}"}
+    predicted = inf_mgr.predictFromImage(filename)
+    #print("Predicted=>{}".format(predicted))
+    utils_mgr.deleteFile(filename)
+    return {"message":"ok", "result":predicted}
