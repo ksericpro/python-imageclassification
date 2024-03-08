@@ -77,3 +77,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 [react-bootstrap] (https://react-bootstrap.netlify.app/docs/getting-started/introduction)
 
 [state variables] (https://www.freecodecamp.org/news/what-is-state-in-react-explained-with-examples/)
+
+[include JS] (https://www.altcademy.com/blog/how-to-load-js-src-from-script-tag-in-reactjs/#:~:text=There%20are%20a%20few%20ways,file%20in%20your%20React%20project.&text=This%20approach%20has%20the%20advantage,it%20also%20has%20some%20downsides.)
+
+[constants] (https://stackoverflow.com/questions/32291851/how-to-define-constants-in-reactjs)

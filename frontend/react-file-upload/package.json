@@ -40,6 +40,8 @@
   },
   "devDependencies": {
     "@types/bootstrap": "^5.2.10",
-    "@types/react-bootstrap": "^0.32.36"
+    "@types/react-bootstrap": "^0.32.36",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.0"
   }
 }

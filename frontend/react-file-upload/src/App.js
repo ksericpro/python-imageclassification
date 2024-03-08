@@ -2,11 +2,23 @@
 
 import axios from "axios";
 import React, { Component } from "react";
-import Button from 'react-bootstrap/Button';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
+import constants from "./constants";
 
+console.log(constants.server);
 
 class App extends Component {
+
+	componentDidMount () {
+		const script = document.createElement("script");
+	
+		script.src = "./config.js";
+		script.async = true;
+	
+		document.body.appendChild(script);
+	}
+	
 	state = {
 		// Initially, no file is selected
 		selectedFile: null,
@@ -40,14 +52,13 @@ class App extends Component {
 
 			// Request made to the backend api
 			// Send formData object
-			axios.post("http://127.0.0.1:8000/predict", formData)
-				 .then((response) => {
+			axios.post(constants.server, formData)
+				.then((response) => {
 					console.log(response);
 					this.setResult(JSON.stringify(response.data));
-				 })
-			     .catch((error) => this.setMsg(error))
+				}).catch((error) => this.setMsg(error));
 		} else {
-			console.log("null")
+			console.log("null");
 			this.setMsg("No file is selected");
 		}
 	};
@@ -56,13 +67,13 @@ class App extends Component {
 		this.setState({
 			errorMsg: msg
 		});
-	}
+	};
 
 	setResult = (msg) => {
 		this.setState({
 			result: msg
 		});
-	}
+	};
 
 	// File content to be displayed after
 	// file upload is complete
