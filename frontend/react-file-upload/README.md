@@ -86,4 +86,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 [Conditional Rendering] (https://legacy.reactjs.org/docs/conditional-rendering.html)
 
-[React Bootstrap](https://blog.logrocket.com/using-bootstrap-react-tutorial-examples/)
+[React Bootstrap] (https://blog.logrocket.com/using-bootstrap-react-tutorial-examples/)
+
+[Bootstap template] (https://getbootstrap.com/docs/4.0/examples/cover/)

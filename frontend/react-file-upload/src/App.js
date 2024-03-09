@@ -3,10 +3,15 @@
 import axios from "axios";
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 import constants from "./constants";
 import { Instructions } from "./components/Instructions";
 import { ImageResult } from "./components/ImageResult";
+
+// Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css";
+// Bootstrap Bundle JS
+import "bootstrap/dist/js/bootstrap.bundle.min";
 
 class App extends Component {
 
