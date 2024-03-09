@@ -5,18 +5,18 @@ import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 import constants from "./constants";
-
-console.log(constants.server);
+import { Instructions } from "./components/Instructions";
+import { ImageResult } from "./components/ImageResult";
 
 class App extends Component {
 
 	componentDidMount () {
-		const script = document.createElement("script");
+		/*const script = document.createElement("script");
 	
 		script.src = "./config.js";
 		script.async = true;
 	
-		document.body.appendChild(script);
+		document.body.appendChild(script);*/
 	}
 	
 	state = {
@@ -114,9 +114,11 @@ class App extends Component {
 	};
 
 	render() {
+		const author = "Eric See";
 		return (
 			<div>
 				<h1>Image Classification</h1>
+				<Instructions author={author}/>
 				<h3>File Upload using React!</h3>
 				<div>
 					<input
@@ -129,6 +131,9 @@ class App extends Component {
 					</Button>
 				</div>
 				{this.fileData()}
+				<div>
+					<ImageResult/>
+				</div>
 			</div>
 		);
 	}
