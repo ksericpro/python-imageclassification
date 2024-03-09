@@ -12,16 +12,15 @@ class App extends Component {
 
 	componentDidMount () {
 		/*const script = document.createElement("script");
-	
 		script.src = "./config.js";
 		script.async = true;
-	
 		document.body.appendChild(script);*/
 	}
 	
 	state = {
 		// Initially, no file is selected
 		selectedFile: null,
+		//imgs: event.target.files,
 		errorMsg: "Choose before Pressing the Upload button",
 		result: ""
 	};
@@ -82,21 +81,15 @@ class App extends Component {
 		if (this.state.selectedFile) {
 			return (
 				<div>
-					<h2>File Details:</h2>
-					<p>
-						File Name:{" "}
-						{this.state.selectedFile.name}
-					</p>
-
-					<p>
-						File Type:{" "}
-						{this.state.selectedFile.type}
-					</p>
-
-					<p>
-						Last Modified:{" "}
-						{this.state.selectedFile.lastModifiedDate.toDateString()}
-					</p>
+					<h4>File Details:</h4>
+					<ul>
+						<li>File Name:{" "}
+						{this.state.selectedFile.name}</li>
+						<li>File Type:{" "}
+						{this.state.selectedFile.type}</li>
+						<li>Last Modified:{" "}
+						{this.state.selectedFile.lastModifiedDate.toDateString()}</li>
+					</ul>
 
 					<p> {this.state.result} </p>
 				</div>
@@ -105,9 +98,9 @@ class App extends Component {
 			return (
 				<div>
 					<br />
-					<h4>
+					<small>
 						{this.state.errorMsg}
-					</h4>
+					</small>
 				</div>
 			);
 		}
@@ -117,9 +110,8 @@ class App extends Component {
 		const author = "Eric See";
 		return (
 			<div>
-				<h1>Image Classification</h1>
+				<h1>Dogs + Cats Image Classification using Tensorflow</h1>
 				<Instructions author={author}/>
-				<h3>File Upload using React!</h3>
 				<div>
 					<input
 						type="file"
@@ -127,12 +119,20 @@ class App extends Component {
 					/>
 
 					<Button variant="primary" onClick={this.onFileUpload}>
-						Upload!
+						Inference
 					</Button>
 				</div>
 				{this.fileData()}
 				<div>
-					<ImageResult/>
+					{/* Display all selected images. Inline Rendering */}   
+					{this.state.selectedFile != null &&     
+						<div>
+							<h4>Inference Result:</h4>
+							<img style={{ "maxHeight": "100pt" }} src={URL.createObjectURL(this.state.selectedFile)} />
+							<ImageResult selectedFile={this.state.selectedFile}/>
+						</div>
+					}		
+
 				</div>
 			</div>
 		);

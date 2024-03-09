@@ -4,14 +4,17 @@ import React, { Component } from "react";
 export class ImageResult extends Component {
   constructor(props) {
     super(props);
-   // this.state = {author: props.author,};
+    this.state = {
+      result: "Dogs",
+      selectedFile: null
+    };
   }
 
   render() {
     return(
       <div>
         <img/>
-        <p>Dot or Cat</p>
+        <p>It is a {this.state.result}</p>
       </div>
     );
   }

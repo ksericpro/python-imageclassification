@@ -81,3 +81,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 [include JS] (https://www.altcademy.com/blog/how-to-load-js-src-from-script-tag-in-reactjs/#:~:text=There%20are%20a%20few%20ways,file%20in%20your%20React%20project.&text=This%20approach%20has%20the%20advantage,it%20also%20has%20some%20downsides.)
 
 [constants] (https://stackoverflow.com/questions/32291851/how-to-define-constants-in-reactjs)
+
+[upload file and preview] (https://www.geeksforgeeks.org/how-to-upload-image-and-preview-it-using-reactjs/)
+
+[Conditional Rendering] (https://legacy.reactjs.org/docs/conditional-rendering.html)
+
+[React Bootstrap](https://blog.logrocket.com/using-bootstrap-react-tutorial-examples/)
