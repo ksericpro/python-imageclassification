@@ -1,22 +1,20 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from "react";
+import React from "react";
 
-export class ImageResult extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      result: "Dogs",
-      selectedFile: null
-    };
-  }
-
-  render() {
-    return(
-      <div>
-        <img/>
-        <p>It is a {this.state.result}</p>
-      </div>
-    );
-  }
-
+function ImageResult({ sharedState, setSharedState, selectedFile }) {
+	return (
+		<div>
+			{/* Display all selected images. Inline Rendering */}   
+			{selectedFile != null &&     
+				<div>
+					<img style={{ "maxHeight": "200pt", "border-radius":"10pt" }} src={URL.createObjectURL(selectedFile)} />					
+				</div>
+			}
+			<button onClick={() => setSharedState("changed new value from A")}>
+				Result: {sharedState}
+			</button>
+		</div>
+	);
 }
+
+export default ImageResult;

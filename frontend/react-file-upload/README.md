@@ -89,3 +89,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 [React Bootstrap] (https://blog.logrocket.com/using-bootstrap-react-tutorial-examples/)
 
 [Bootstap template] (https://getbootstrap.com/docs/4.0/examples/cover/)
+
+[state] (https://codedamn.com/news/reactjs/how-can-i-share-data-between-components)
