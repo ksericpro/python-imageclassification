@@ -164,6 +164,10 @@ weighted avg       0.77      0.77      0.77      2000
 - curl localhost:8000/inference
 - python upload-image-request.pys
 
+# starting frontend
+- cd front-end/react-file-upload
+- npm start
+
 # references
 
 [link] (https://www.gradio.app/guides/quickstart)
