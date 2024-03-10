@@ -55,7 +55,7 @@ def main():
     file.close()
 
     # Launch UI
-    iface.launch(share=True)
+   # iface.launch(share=True)
     
 def trainandsave():
     print("-Training-")
@@ -214,14 +214,14 @@ def cat_or_dog(img):
 #set the user uploaded image as the input array
 #match same shape as the input shape in the model
 #im = gradio.inputs.Image(shape=(IMG_SIZE, IMG_SIZE), image_mode='L', invert_colors=False, source="upload")
-im = gradio.inputs.Image(type="numpy", shape=(IMG_SIZE, IMG_SIZE))
+#im = gradio.inputs.Image(type="numpy", shape=(IMG_SIZE, IMG_SIZE))
 # show image shape
 #setup the interface
-iface = gr.Interface(
-    fn = cat_or_dog, 
-    inputs = im, 
-    outputs = gradio.outputs.Label(),
-)
+#iface = gr.Interface(
+#    fn = cat_or_dog, 
+#    inputs = im, 
+#    outputs = gradio.outputs.Label(),
+#)
 
 if __name__ == "__main__":
     main()
